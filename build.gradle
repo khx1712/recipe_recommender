@@ -1,3 +1,17 @@
+buildscript {
+	ext {
+		dl4j_use_cuda = false
+		dl4j_version = "1.0.0-beta5"
+	}
+
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.+"
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.3.3.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
@@ -26,6 +40,20 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'io.jsonwebtoken:jjwt-api:0.10.7'
 	implementation 'mysql:mysql-connector-java'
+
+	compile group: 'javax.el', name: 'javax.el-api', version: '3.0.0'
+
+	compile "org.deeplearning4j:deeplearning4j-core:${dl4j_version}"
+	if (dl4j_use_cuda) {
+		compile "org.nd4j:nd4j-cuda-8.0-platform:${dl4j_version}"
+	} else {
+		compile "org.nd4j:nd4j-native-platform:${dl4j_version}"
+	}
+	compile "org.deeplearning4j:arbiter-ui_2.11:${dl4j_version}"
+	compile group: 'org.datavec', name: 'datavec-data-codec', version: "${dl4j_version}"
+	compile group: 'org.deeplearning4j', name: 'deeplearning4j-util', version: "${dl4j_version}"
+	compile group: 'org.nd4j', name: 'nd4j-common', version: "${dl4j_version}"
+
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	runtime 'io.jsonwebtoken:jjwt-impl:0.10.7'
 	runtime 'io.jsonwebtoken:jjwt-jackson:0.10.7'
