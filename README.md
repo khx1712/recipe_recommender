@@ -1,7 +1,1 @@
-<<<<<<< HEAD
-"# artmining "
-test2
-=======
-"# artmining" 
-aatest4
->>>>>>> b1f46b45f7c9bfc3802e55159a292853005dd39c
+Word2Vec를 이용한 레시피추천 API서버입니다.
