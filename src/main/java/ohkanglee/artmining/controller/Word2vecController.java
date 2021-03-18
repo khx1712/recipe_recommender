@@ -43,10 +43,10 @@ public class Word2vecController {
         return ResponseEntity.created(location_uri).body("model을 load하여 학습을 시작하였습니다.");
     }
 
-    @GetMapping("/newuser/recommend/{size}")
+    @GetMapping("/user/recommend")
     public ResponseEntity<?> recommend(
             @RequestBody ingredientList list,
-            @PathVariable("size") Integer uriSize
+            @RequestParam("size") Integer uriSize
     ) throws URISyntaxException {
         List<String> uriList = word2VecService.Word2vecRecommend(list, uriSize);
         Map<String, Object> meta = new HashMap<>();
@@ -60,10 +60,10 @@ public class Word2vecController {
         return ResponseEntity.created(location_uri).body(resRecipeDto);
     }
 
-    @GetMapping("/newuser/recommend2/{size}")
+    @GetMapping("/user/recommend2")
     public ResponseEntity<?> recommend2(
-            @RequestParam("ingred") String list,
-            @PathVariable("size") Integer uriSize
+            @RequestParam("ingredient") String list,
+            @RequestParam("size") Integer uriSize
     ) throws URISyntaxException {
         List<String> uriList = word2VecService.Word2vecRecommend2(list, uriSize);
         Map<String, Object> meta = new HashMap<>();
